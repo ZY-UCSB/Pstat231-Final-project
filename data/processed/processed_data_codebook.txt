@@ -1,0 +1,31 @@
+**Since we processed data in R, there is no csv file in processed folder.
+The original data set is from Kaggle. (Link: https://www.kaggle.com/datasets/sudalairajkumar/cryptocurrencypricehistory?resource=download)
+
+Here is a full list of variables in processed data `coins`
+
+There are 12 variables:
+(Name: Description / Data Type / Measurement Unit)
+  
+1.`Date(date)` : Date of observation / character / date
+  
+2.`ETH(eth)` : Mean price of Ethereum of each day / numeric / USD
+  
+3.`BTC(btc)` : Mean price of Bitcoin of each day / numeric / USD
+  
+4.`ADA(ada)` : Mean price of Cardano of each day / numeric / USD
+  
+5.`DOGE(doge)` : Mean price of Doge Coin of each day / numeric / USD
+  
+6.`LTC(ltc)` : Mean price of Litecoin of each day / numeric / USD
+  
+7.`XLM(xlm)` : Mean price of Stellar of each day / numeric / USD
+  
+8.`BNB(bnb)` : Mean price of Binance Coin of each day / numeric / USD
+  
+9.`USDT(usdt)` : Mean price of Tether of each day / numeric / USD
+  
+10.`XMR(xmr)` : Mean price of Monero of each day / numeric / USD
+  
+11.`USDC(usdc)` : Mean price of USD Coin of each day / numeric / USD
+  
+12.`XRP(xrp)` : Mean price of XRP of each day / numeric / USD

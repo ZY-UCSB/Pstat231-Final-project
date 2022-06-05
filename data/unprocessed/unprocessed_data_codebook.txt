@@ -1,0 +1,34 @@
+Here is the original data set download from Kaggle. (Link: https://www.kaggle.com/datasets/sudalairajkumar/cryptocurrencypricehistory?resource=download)
+
+We will not directly use the original data set as our final data set. We will process the original data in R.
+
+If you need the information about our final data set `coins`, please check the `processed` folder, where we have the codebook for our final data set.
+
+There are 11 csv files in `unprocessed` folder. Each file is the historical trading date of different kinds of Cryptocurrencies with the name on it.
+
+All the files are consists of the same variables.
+
+To help you have a better understanding on our project and how we get our final data set `coins`, here is a full list of variables from original data set.
+
+Each *original* csv file provides 10 variables:
+(Name: Description / Data Type / Measurement Unit)
+  
+1.`SNo` : Index of each observation / Integer / --
+  
+2.`Name` : Name of each kind of Cryptocurrency / character / --
+  
+3.`Symbol` : Symbol represented each kind of Cryptocurrency / character / --
+  
+4.`Date` : Date of observation / character / --
+  
+5.`Open` : Opening price on the given day / numeric / USD
+  
+6.`High` : Highest price on the given day / numeric / USD
+  
+7.`Low` : Lowest price on the given day / numeric / USD
+  
+8.`Close` : Closing price on the given day / numeric / USD
+  
+9.`Volume` : Volume of transactions on the given day / numeric / number of tokens
+  
+10.`Market Cap` : Market capitalization in USD / numeric / USD
