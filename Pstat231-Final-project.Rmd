@@ -10,6 +10,7 @@ output:
   pdf_document: default
 editor_options:
   chunk_output_type: inline
+always_allow_html: true
 ---
 
 
@@ -117,7 +118,7 @@ The purpose of this project is to predict the value of Ether with the historical
   
 ## What Is Ethereum?
   
-[Ethereum](https://ethereum.org/en/) is a decentralized, open-source [blockchain](https://en.wikipedia.org/wiki/Blockchain) with smart contract functionality. Ether (ETH or Ξ) is the native [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) of the platform. Among cryptocurrencies, Ether is second only to Bitcoin in market capitalization.
+[Ethereum](https://ethereum.org/en/) is a decentralized, open-source [blockchain](https://en.wikipedia.org/wiki/Blockchain) with smart contract functionality. Ether (ETH) is the native [cryptocurrency](https://en.wikipedia.org/wiki/Cryptocurrency) of the platform. Among cryptocurrencies, Ether is second only to Bitcoin in market capitalization.
   
 Ethereum allows anyone to deploy permanent and immutable decentralized applications onto it, with which users can interact. It means that the market is not influenced by the government, and the currency cannot be inflated. In simple words, Ether belongs to one of the virtual encrypted digital currencies. People can use it to trade online and it is recognized by many institutions. Its security can be guaranteed, and transactions can be conducted anytime and anywhere in the network environment, which is why it has become very popular in recent years.
   
