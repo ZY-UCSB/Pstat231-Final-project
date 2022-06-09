@@ -3,11 +3,11 @@ title: "Pstat231 Project"
 author: "Zihao Yang"
 date: '2022-05-11'
 output:
+  pdf_document: default
   html_document:
     toc: true
     toc_float: true
     code_folding: show
-  pdf_document: default
 editor_options:
   chunk_output_type: inline
 always_allow_html: true
@@ -465,7 +465,7 @@ coins_train <- training(coins_split)
 coins_test <- testing(coins_split)
 ```
   
-* Check the dimension of training and testing set
+**Check the dimension of training and testing set**
   
 ```{r}
 dim(coins_train)
@@ -744,7 +744,7 @@ final_rf <- augment(rf_final_fit, new_data = coins_train)
 final_rf %>% rmse(truth = eth, estimate = .pred)
 ```
   
-It is surprised that the value of RMSE of random forest model is only **19.811255**, which is slightly better than the KNN model.
+It is surprised that the value of RMSE of random forest model is only **18.93514**, which is slightly better than the KNN model.
   
 ## Boosted Trees Model
   
@@ -752,11 +752,12 @@ In a similar process, we need to set up the specification and the workflow.
   
 **Model specification and workflow**
   
-In boosted tree model, we choose to tune `trees`. Set `mode` to `"regression"` and use `xgboost` engine.
+In boosted tree model, we choose to tune `trees` and `learning rate`. Set `mode` to `"regression"` and use `xgboost` engine.
   
 ```{r}
 bt_model <- boost_tree(mode = "regression",
-                       trees = tune()) %>% 
+                       trees = tune(),
+                       learn_rate = tune()) %>% 
   set_engine("xgboost")
 
 bt_wkflow <- workflow() %>% 
@@ -766,10 +767,10 @@ bt_wkflow <- workflow() %>%
   
 **Tuning grid**
   
-Here we set `trees` in the range from 10 to 2000 and use 10 levels.
+Here we set `trees` in the range from 10 to 1000 and `learning rate` between 0.1 and 0.3, with using 10 levels.
   
 ```{r}
-bt_grid <- grid_regular(trees(c(10,2000)), levels = 10)
+bt_grid <- grid_regular(trees(c(10,1000)),learn_rate(c(0.1,0.3)), levels = 10)
 ```
   
 **Boosted Tree Model fitting**
@@ -826,11 +827,11 @@ final_bt <- augment(bt_final_fit, new_data = coins_train)
 final_bt %>% rmse(truth = eth, estimate = .pred)
 ```
   
-The RMSE of our boosted tree model is only **0.0013426646**, which is far smaller than all three models before. So we should use boosted tree model as our final model.
+The RMSE of our boosted tree model is only **7.4416747**, which is smaller than all three models before. So we should use boosted tree model as our final model.
   
 Now let’s continue with the **Boosted Tree Model** being the model that performed best.
   
-##Final Model Fitting
+## Final Model Fitting
   
 Now we can fit our boosted tree model to our testing data set.
   
@@ -840,7 +841,7 @@ final_bt_test <- augment(bt_final_fit, new_data = coins_test)
 final_bt_test %>% rmse(truth = eth, estimate = .pred)
 ```
   
-We find that the RMSE value = **42.717332**	 on the testing data set is much larger than the one from the training set which is **0.0013426646**. It usually indicates that our model is overfitting to the data.
+We find that the RMSE value = **60.641016**	 on the testing data set is much larger than the one from the training set which is **7.4416747**. It usually indicates that our model is overfitting to the data.
   
 To see it clearly, let's take a close look at our predicted value and true value.
   
@@ -874,7 +875,7 @@ data_mod2 %>% ggplot(aes(x = Observed,
   ggtitle("Predicted VS Observed value on testing set")
 ```
   
-From both plot, we can see our boosted tree model as the best model fits the training data set very well. It is almost perfect. However, the second plot shows that comparing to the training set, the model is not fitting well on the testing set. But we can see the predicted value are not scattering too far from the observed value.
+From both plot, we can see our boosted tree model as the best model fits the training data set very well. It is almost perfect. However, the second plot shows that comparing to the training set, the model is not fitting that well on the testing set. But we can see the predicted value are not scattering too far from the observed value. It means although our model is overfitting, it still do a good job on the testing data.
   
 # Conclusion
   
@@ -884,9 +885,9 @@ This study use the historical mean price data of top 10 Cryptocurrencies to pred
   
 ## Best Model
   
-Our best model is the boosted tree model with RMSE of 0.0013426646, which is amazingly small. The poorest model is the Ridge regression model with the highest RMSE of 112.09605. And the RMSE of the rest two model are really close to each other. The RMSE of KNN model is 20.697688, and the RMSE of the random forest model is 18.93514.
+Our best model is the boosted tree model with RMSE of 7.4416747, which is the smallest among our models. The poorest model is the Ridge regression model with the highest RMSE of 112.09605. And the RMSE of the rest two model are really close to each other. The RMSE of KNN model is 20.697688, and the RMSE of the random forest model is 18.93514.
   
-Although the boosted tree model has the lowest RMSE and seems to be perfect. When we fit it to the testing data set, the RMSE becomes quite larger than before with 42.717332. That means our model is overfitting to the testing data set. I think it may be caused by that there are few observations in the training data set. If we could have more observations in our data or split more for testing, then maybe the model would perform better.
+Although the boosted tree model has the lowest RMSE and seems to be perfect. When we fit it to the testing data set, the RMSE becomes quite larger than before with 60.641016. That means our model is overfitting to the testing data set. I think it may be caused by that there are few observations in the training data set. If we could have more observations in our data or split more for testing, then maybe the model would perform better.
   
 ## Overall Conclusion
   
